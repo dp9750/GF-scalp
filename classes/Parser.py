@@ -8,15 +8,10 @@ class Parser:
     def parse_data(self, data):
         try:
             data = data.split("\n")
-
             date = self._get_date(data[0])
-            forex = self._get_value(data[2])
-            pro = self._get_value(data[4])
-            optimal1 = self._get_value(data[6])
-            optimal2 = self._get_value(data[8])
-            prime = self._get_value(data[10])
+            values = [self._get_value(data[i]) for i in range(2, 11, 2)]
 
-            return Data(date, forex, pro, optimal1, optimal2, prime)
+            return Data(date, values)
         except Exception as ex:
             print(f"Error getting value: {str(ex)}")
             return None
