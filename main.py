@@ -1,8 +1,8 @@
 import os
 from dotenv import load_dotenv
 from telethon import TelegramClient, events
-from Parser import Parser
-from Draw import Draw
+from classes.Parser import Parser
+from classes.Draw import Draw
 
 load_dotenv()
 
