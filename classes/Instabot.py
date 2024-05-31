@@ -1,9 +1,4 @@
-import os
 from instabot import Bot
-
-
-USERNAME = os.getenv("USERNAME", "")
-PASSWORD = os.getenv("PASSWORD", "")
 
 
 class Instabot:
@@ -11,8 +6,8 @@ class Instabot:
     def __init__(self) -> None:
         self.bot = Bot()
 
-    def login(self):
-        self.bot.login(username=USERNAME, password=PASSWORD)
+    def login(self, username, password):
+        self.bot.login(username=username, password=password)
 
     def logout(self):
         self.bot.logout()
