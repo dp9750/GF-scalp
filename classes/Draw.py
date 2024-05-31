@@ -18,7 +18,7 @@ FILE_EXT = ".png"
 
 class Draw:
 
-    def draw(self, data: Data):
+    def draw(self, data: Data) -> str:
 
         # Open an Image
         img = Image.open(EMPTY_IMG)
@@ -36,9 +36,7 @@ class Draw:
         for i, value in enumerate(data.data):
             I1.text((X, Y + i * OFFSET), value, font=font, fill=FILL)
 
-        # Display edited image
-        # img.show()
-
-        # Save the edited image
+        # Save the edited image and return the filename
         filename = "imgs/" + data.date + FILE_EXT
         img.save(filename)
+        return filename
