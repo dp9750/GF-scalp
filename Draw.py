@@ -2,7 +2,7 @@ from PIL import Image
 from PIL import ImageDraw
 from PIL import ImageFont
 
-EMPTY_IMG = "Empty.png"
+EMPTY_IMG = "imgs/Empty.png"
 FONT = "fonts/Barlow-SemiBold.ttf"
 FONT_SIZE_DATE = 45
 FONT_SIZE_PROFIT = 63
