@@ -1,36 +1,39 @@
 from datetime import datetime
+from classes.Data import Data
 
 
+# custom data parser specific to this project
 class Parser:
 
-    def parse_data(self, data, test=False):
+    def parse_data(self, data):
         try:
-            if not test:
-                data = data.split("\n")
+            data = data.split("\n")
 
-            date = self.get_date(data[0])
+            date = self._get_date(data[0])
+            forex = self._get_value(data[2])
+            pro = self._get_value(data[4])
+            optimal1 = self._get_value(data[6])
+            optimal2 = self._get_value(data[8])
+            prime = self._get_value(data[10])
 
-            return {
-                "date": date,
-                "forex": self.get_value(data[2]),
-                "pro": self.get_value(data[4]),
-                "optimal1": self.get_value(data[6]),
-                "optimal2": self.get_value(data[8]),
-                "prime": self.get_value(data[10]),
-            }
-
-        except Exception:
+            return Data(date, forex, pro, optimal1, optimal2, prime)
+        except Exception as ex:
+            print(f"Error getting value: {str(ex)}")
             return None
 
-    def get_date(self, firstRow):
-        s = "Daily income of S-Group for "
-        date = firstRow[len(s) :].split()
+    def _get_date(self, firstRow):
+        try:
+            s = "Daily income of S-Group for "
+            date = firstRow[len(s) :].split()
 
-        day = date[1]
-        month = date[0]
-        year = datetime.now().year
+            day = date[1]
+            month = date[0]
+            year = datetime.now().year
 
-        return f"{month} {day}, {year}"
+            return f"{month} {day}, {year}"
+        except Exception as ex:
+            print(f"Error parsing date: {str(ex)}")
+            return None
 
-    def get_value(self, s: str) -> str:
+    def _get_value(self, s: str) -> str:
         return s.split(" ")[-1][1:-1]

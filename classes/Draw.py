@@ -1,18 +1,24 @@
 from PIL import Image
 from PIL import ImageDraw
 from PIL import ImageFont
+from classes.Data import Data
+
 
 EMPTY_IMG = "imgs/Empty.png"
 FONT = "fonts/Barlow-SemiBold.ttf"
 FONT_SIZE_DATE = 45
 FONT_SIZE_PROFIT = 63
+XY_DATE = (400, 570)
 X, Y = 755, 815
 FILL = (18, 19, 25)
+FILL_DATE = (255, 255, 255)
+OFFSET = 185
+FILE_EXT = ".png"
 
 
 class Draw:
 
-    def draw(self, data):
+    def draw(self, data: Data):
 
         # Open an Image
         img = Image.open(EMPTY_IMG)
@@ -25,16 +31,14 @@ class Draw:
         font = ImageFont.truetype(FONT, FONT_SIZE_PROFIT)
 
         # Add Text to an image
-        I1.text((400, 570), data["date"], font=font_date, fill=(255, 255, 255))
-        I1.text((X, Y), data["forex"], font=font, fill=FILL)
-        I1.text((X, Y + 185), data["pro"], font=font, fill=FILL)
-        I1.text((X, Y + 2 * 185), data["optimal1"], font=font, fill=FILL)
-        I1.text((X, Y + 3 * 185), data["optimal2"], font=font, fill=FILL)
-        I1.text((X, Y + 4 * 185), data["prime"], font=font, fill=FILL)
+        I1.text(XY_DATE, data.date, font=font_date, fill=FILL_DATE)
+        # Incomes
+        for i, value in enumerate(data.data):
+            I1.text((X, Y + i * OFFSET), value, font=font, fill=FILL)
 
         # Display edited image
         # img.show()
 
         # Save the edited image
-        filename = data["date"] + ".png"
+        filename = "imgs/" + data.date + FILE_EXT
         img.save(filename)
