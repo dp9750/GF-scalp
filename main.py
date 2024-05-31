@@ -26,7 +26,6 @@ async def newMessageListener(event):
     data = parser.parse_data(event.message.message)
     draw.draw(data)
 
-    # create image
     # post to instagram
 
     # forward message to saved
